@@ -37,7 +37,6 @@ icon_label.image = tk_image
 #################建立標籤#######################
 city_name_label = Label(window, text="城市名稱")
 city_name_label.grid(row=0, column=0)
-
 icon_label = Label(window, text="天氣圖標")
 icon_label.grid(row=1, column=0)
 
