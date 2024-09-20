@@ -60,8 +60,8 @@ check = Checkbutton(
     onvalue=True,
     offvalue=False,
     command=on_switch_change,
-    style="my.TCheckbutton",
+    style="溫度單位(℃/℉)",
 )
-check.grid(row=1, column=1, padx=10, pady=10)
+check.grid(row=2, column=1, padx=10, pady=10)
 #####################運行應用程式#######################
 window.mainloop()
