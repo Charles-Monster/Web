@@ -23,3 +23,11 @@ class WeatherAPI:
 
     def get_icon_url(self, icon_code):
         return f"{self.icon_base_url}{icon_code}@2x.png"
+
+    def get_icon(self, icon_code):
+        icon_url = self.get_icon_url(icon_code)
+        response = requests.get(icon_url)
+        if response.status_code == 200:
+            return response.content
+        else:
+            return None
