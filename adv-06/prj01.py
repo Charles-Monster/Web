@@ -1,6 +1,7 @@
 import requests
 
-#####################定義常數#######################
+###
+##################定義常數#######################
 API_KEY = "5a67c8c7f697cf6dc00b249ed3d17572"
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather?"
 UNITS = "metric"
