@@ -42,7 +42,6 @@ async def weather(interaction: discord.Interaction, city: str, forrecast: bool =
     await interaction.response.defer()
     unit_symbol = "C" if weather_api.units == "metric" else "F"
 
-
     if not forrecast:
         info = weather_api.get_current_weather(city)
         if "weather" in info and "main" in info:
@@ -50,25 +49,44 @@ async def weather(interaction: discord.Interaction, city: str, forrecast: bool =
             weather_description = info["weather"][0]["description"]
             icon_code = info["weather"][0]["icon"]
             icon_url = weather_api.get_icon_url(icon_code)
-            embed=discord.Embed(title=f"{city}的當前天氣",
-            description=f"描述:{weather_description}"
-            color=0x1E90FF,)
+            embed = discord.Embed(
+                title=f"{city}的當前天氣",
+                description=f"描述:{weather_description}",
+                color=0x1E90FF,
+            )
             embed.set_thumbnail(url=icon_url)
-            embed.add_field(name="溫度", value=f"{current_temprature}度{unit_symbol}",inline=False)
+            embed.add_field(
+                name="溫度", value=f"{current_temprature}度{unit_symbol}", inline=False
+            )
             await interaction.followup.send(embed=embed)
         else:
             await interaction.followup.send(f"找不到**{city}**的天氣資訊。")
+
     else:
-        info=weather_api.get_forecast(city)
+        info = weather_api.get_forecast(city)
         if "list" in info:
             forrecast_list = info["list"][:10]
-            embeds=[]
+            embeds = []
             for forrecast in forrecast_list:
-                dt_txt=forrecast["dt_txt"]
-                temp=forrecast["main"]["temp"]
-                description=forrecast["weather"][0]["description"]
-                icon_code=forrecast["weather"][0]["icon"]
-                icon_url=weather_api.get_icon_url(icon_code)
+                dt_txt = forrecast["dt_txt"]
+                temp = forrecast["main"]["temp"]
+                description = forrecast["weather"][0]["description"]
+                icon_code = forrecast["weather"][0]["icon"]
+                icon_url = weather_api.get_icon_url(icon_code)
+                embed = discord.Embed(
+                    title=f"{city}天氣預報-{dt_txt}",
+                    decription=f"描述{description},color=0x1E90FF",
+                )
+                embed.set_thumbnail(url=icon_url)
+                embed.add_field(
+                    name="溫度", value=f"{temp}度{unit_symbol}", inline=False
+                )
+                embeds.append(embed)
+            await interaction.followup.send(embeds=embeds)
+        else:
+            await interaction.followup.send(f"找不到**{city}**的天氣預報。")
+
+
 #####################啟動#####################
 def main():
     bot.run(os.getenv("DC_BOT_TOKEN"))
