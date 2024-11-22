@@ -42,6 +42,10 @@ async def on_message(message):
             await message.channel.send("遊戲結束！")
         else:
             game_data = channel_games[channel_id]["game data"]
+            if "history" not in channel_games[channel_id]:
+                channel_games[channel_id]["history"] = []
+            history = channel_games[channel_id]["history"]
+            history.append({"role": "user", "content": user_input})
 
 
 #######################指令#######################
