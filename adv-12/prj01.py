@@ -14,10 +14,8 @@ intents.message_content = True
 bot = discord.Client(intents=intents)
 tree = discord.app_commands.CommandTree(bot)
 
-weather_api = WeatherAPI(os.getenv("5a67c8c7f697cf6dc00b249ed3d17572"))
-openai.api_key = os.getenv(
-    "sk-proj-jm_ZCCF1_bg-7A63CjEsldzUjsA4TUNEYD8QrU3VwYopAoEaWTasQilnE7V3YZnOned3uTjvluT3BlbFJ6yiTSWdvnpD2d89c7DEV52WoX57aanueeiWz5kC2hOTj-qNgve2Whz2zhoV4Vcl6-jhROI1GgA"
-)
+weather_api = WeatherAPI(os.getenv(""))
+openai.api_key = os.getenv("")
 
 
 ####################事件###################
